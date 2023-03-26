@@ -1,0 +1,1 @@
+- These notes mainly come from **DevOps4Beginners**
