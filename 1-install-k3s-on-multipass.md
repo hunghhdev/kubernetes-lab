@@ -7,9 +7,9 @@
 - Install multipass  ```snap install multipass```
 - Create a note name's **k-master**  ```multipass launch -n k-master``` default cpu 1 disk 5Gb memory 1Gb image lastest lts
 - Create 2 worker nodes: **k-node1**, **k-node2** ```multipass launch -n k-node1``
-- Deploy k3s to master node: ```multipass exec k-master -- bash -c "curl -sfL https://get.k3s.io | sh -"``` k3s default use containerd if want use docker https://docs.k3s.io/advanced#using-docker-as-the-container-runtime
-- Save master token to **TOKEN** variable: ```TOKEN=$(multipass exec k3s-master sudo cat /var/lib/rancher/k3s/server/node-token)```
-- Save master ip to **IP** variable: ```IP=$(multipass info k3s-master | grep IPv4 | awk '{print $2}')```
+- Deploy k3s to master node: ```multipass exec k-master -- bash -c "curl -sfL https://get.k3s.io | sh -s - --write-kubeconfig-mode 644"``` k3s default use containerd if want use docker https://docs.k3s.io/advanced#using-docker-as-the-container-runtime
+- Save master token to **TOKEN** variable: ```TOKEN=$(multipass exec k-master sudo cat /var/lib/rancher/k3s/server/node-token)```
+- Save master ip to **IP** variable: ```IP=$(multipass info k-master | grep IPv4 | awk '{print $2}')```
 - Add **k-node1** to cluster: ```multipass exec k-node1 -- bash -c "curl -sfL https://get.k3s.io | K3S_URL=\"https://$IP:6443\" K3S_TOKEN=\"$TOKEN\" sh -"```
 - Add **k-node2** to cluster: ```multipass exec k-node2 -- bash -c "curl -sfL https://get.k3s.io | K3S_URL=\"https://$IP:6443\" K3S_TOKEN=\"$TOKEN\" sh -"```
 
