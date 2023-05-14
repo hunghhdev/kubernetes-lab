@@ -2,6 +2,11 @@
 - A pod is a group of one or more containers, with shared storage/network resources and a specification for how to run the containers
 ## 4 required fields:
 - apiVersion: Indicates the release version of kubernetes object
+  - Pod: v1
+  - Service: v1
+  - ReplicaSet: apps/v1
+  - Deployment: apps/v1
+  - ...
 - kind: Indicates what type of kubernetes object you want to create
 - metadata: This include name, annotation, labels, namespace and other information releated to the object.
 - spec: stands for specification and contains the kubernetes object specification
